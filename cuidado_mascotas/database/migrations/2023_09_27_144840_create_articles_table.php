@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
         $table->bigIncrements('id');
         $table->unsignedBigInteger('profile_id');
-        $table->string('title');
+        $table->string('title',50);
         $table->text('content');
         $table->string('image')->nullable();
         $table->timestamps();
