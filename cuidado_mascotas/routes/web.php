@@ -19,12 +19,16 @@ Route::get('/', function () {
     return view('visitor.index');
 });
 
+Route::get('/index', function () {
+    return view('visitor.index');
+});
+
 Route::get('/contacto', function () {
     return view('visitor.contacto');
 });
 
 Route::get('/blog', function () {
-    return view('visitor.blog');
+    return view('blog');
 });
 //VISTAS PARA ADMINISTRADOR
 Route::get('/home_admin', function () {
@@ -42,6 +46,12 @@ Route::get('/editar_articulos', function () {
 Route::get('/eliminar_articulos', function () {
     return view('admin.eliminar_articulos');
 });
+
+
+Route::get('/login', function () {
+    return view('visitor.login');
+});
+
 
 Route::post('/crear_articulos',function (Request $request){
     // Valida los datos del formulario
