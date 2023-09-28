@@ -20,8 +20,8 @@
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="index" class="nav-link active" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="blog" class="nav-link">Blog</a></li>
-        <li class="nav-item"><a href="editar_articulos" class="nav-link">Admin</a></li>
-        <li class="nav-item"><a href="login" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="login_admin" class="nav-link">Admin</a></li>
+        <!-- <li class="nav-item"><a href="login" class="nav-link">Login</a></li> -->
       </ul>
     </header>
   </div>

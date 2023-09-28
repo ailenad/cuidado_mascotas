@@ -8,6 +8,7 @@
       </div>
       <div class="col-md-10 mx-auto col-lg-5">
         <form method="POST" action="/crear_articulos" class="p-4 p-md-5 border rounded-3 bg-light">
+          @csrf
           <div class="form-floating mb-3">
             <input type="number" name="profile_id" id="profile_id" required class="form-control" id="floatingInput">
             <label for="profile_id">Id</label>
