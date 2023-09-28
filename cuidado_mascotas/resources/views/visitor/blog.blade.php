@@ -1,4 +1,6 @@
-
+<header id="header">
+    @include('header')
+  </header>
 <section id="blog" class="blog">
 <div class="container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
