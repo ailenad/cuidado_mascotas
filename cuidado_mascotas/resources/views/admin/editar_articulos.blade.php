@@ -11,7 +11,7 @@
         <p class="col-lg-10 fs-4">Tu voz importa! Siempre estamos en busca de la información más actualizada y los consejos más efectivos sobre el cuidado de mascotas. Si tienes alguna corrección, actualización o información adicional que crees que sería valiosa para nuestra comunidad, te invitamos a editar este contenido. Juntos, podemos garantizar que nuestros recursos sean siempre precisos y útiles. ¡Gracias por tu contribución y por hacer que este blog sea aún mejor!</p>
       </div>
       <div class="col-md-10 mx-auto col-lg-5">
-        <form method="POST" action="/editar_articulos" class="p-4 p-md-5 border rounded-3 bg-light">
+        <form method="POST" action="/editar_articulos/{{ $article->id }}" class="p-4 p-md-5 border rounded-3 bg-light">
           <div class="form-floating mb-3">
             <input type="number" name="profile_id" id="profile_id" required class="form-control" id="floatingInput">
             <label for="profile_id">Id</label>

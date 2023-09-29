@@ -45,9 +45,6 @@ Route::get('/editar_articulos', function () {
     return view('admin.editar_articulos');
 });
 
-Route::get('/eliminar_articulos', function () {
-    return view('admin.eliminar_articulos');
-});
 
 Route::get('/abm_articles', function () {
     return view('admin.abm_articles');
@@ -89,4 +86,62 @@ Route::post('/crear_articulos',function (Request $request){
     // Asocia el artículo con el perfil del usuario
   
      return redirect('/abm_articles');
+});
+
+// Ruta para mostrar el formulario de edición
+Route::put('/editar_articulos/{id}', function ($id) {
+    $article = Article::find($id);
+    // Comprueba si el artículo existe
+    if (!$article) {
+        abort(404);
+    }
+    return view('admin.editar_articulos', ['article' => $article]);
+});
+
+// Ruta para procesar la actualización del artículo
+Route::post('/editar_articulos/{id}', function (Request $request, $id) {
+    // Valida los datos del formulario
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'profile_id' => 'required|integer', // Asegúrate de que profile_id sea un entero
+    ]);
+
+    // Busca el artículo por su ID
+    $article = Article::find($id);
+
+    // Comprueba si el artículo existe
+    if (!$article) {
+        abort(404);
+    }
+
+    // Actualiza los campos del artículo con los datos validados
+    $article->update($validatedData);
+
+    // Redirige a la página de administración de artículos
+    return redirect('/abm_articles');
+});
+
+
+
+
+
+ Route::get('/eliminar_articulos', function () {
+    return view('admin.eliminar_articulos');
+});
+ 
+
+
+
+// Ruta para eliminar un artículo
+Route::delete('/eliminar_articulos/{id}', function ($id) {
+    $article = Article::find($id);
+    // Comprueba si el artículo existe
+    if (!$article) {
+        abort(404);
+    }
+    // Elimina el artículo de la base de datos
+    $article->delete();
+    // Redirige a la página de administración de artículos o a donde desees
+    return redirect('/abm_articles');
 });

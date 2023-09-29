@@ -19,25 +19,26 @@ Mi tabla de usuario necesita:
         <form method="POST" action="/login_admin" class="p-4 p-md-5 border rounded-3 bg-light">
           @csrf
           <!-- usuario -->
+
           <div class="form-floating mb-3">
-          <input type="text" name="nombre" placeholder="Nombre de usuario" required>
-            <label for="nombre">Ingrese su nombre</label>
+          <input type="text" name="nombre" class="form-control" placeholder="Nombre de usuario" required>
+          <label for="nombre">Ingrese su nombre</label>
           </div>
           <div class="form-floating mb-3">
-          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required>
             <label for="Email">Ingrese su direccion de correo</label>
           </div>
           <div class="form-floating mb-3">
-          <input type="password" name="password" placeholder="Contraseña" required>
+          <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
             <label for="email">Ingrese su contraseña</label>
           </div>
           <!-- perfil -->
           <div class="form-floating mb-3">
-            <input type="text" name="first_name" placeholder="Nombre" required>
+            <input type="text" name="first_name" class="form-control" placeholder="Nombre" required>
             <label for="first_name">Nombre</label>
           </div>  
           <div class="form-floating mb-3">
-          <input type="text" name="last_name" placeholder="Apellido" required>
+          <input type="text" name="last_name" class="form-control" placeholder="Apellido" required>
             <label for="last_name">Apellido</label>
           </div>   
           <button class="w-100 btn btn-lg btn-primary" type="submit">Registrarse</button>
