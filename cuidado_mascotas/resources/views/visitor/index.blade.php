@@ -5,7 +5,7 @@
     @include('header')
   </header><!-- End Header -->
  <section>
- <img class="d-block mx-auto mb-4" src="{{ asset('../src/home.png')}}" alt="" width="72" height="57">
+ <img class="d-block mx-auto mb-4" src="{{ asset('/img/home.png')}}" alt="">
  </section>
   <main id="main">
   <div id="servicios">
