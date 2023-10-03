@@ -21,6 +21,10 @@
                         <h5 class="card-title">{{ $articulo->title }}</h5>
                         <p class="card-text">{{ $articulo->content}}</p>
                         <p>{{ $articulo->profile_id}}</p>
+                        <!-- <button class=" btn btn-lg btn-primary" type="submit">Editar</button> -->
+                        <button class="w-100 btn btn-lg btn-primary mb-3" type="submit"> <a href="/editar_articulos" class="nav-link">Editar</a></button>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit"> <a href="/eliminar_articulos" class="nav-link">Eliminar</a></button>
+                        <!-- <button class="btn btn-lg btn-primary" type="submit">Eliminar</button> -->
                     </div>
                 </div>
             </div>
@@ -29,18 +33,9 @@
   </div>
 </section>
 
-<section id="crear_articulos" class="crear_articulos">
-  <!-- ======= Footer ======= -->
-  @include('admin.crear_articulos')
-  <!-- End Footer -->
-</section>
 
-<section>
-<img src="{{ asset('/img/perro-home.jpg')}}" class="rounded float-start" alt="...">
-<img src="{{ asset('/img/perro-home-2.jpg')}}" class="rounded float-end" alt="...">
-<!-- <img src="{{ asset('/img/perro-home-3.jpg')}}" class="rounded float-start" alt="...">
-<img src="{{ asset('/img/perro-home-4.jpg')}}" class="rounded float-end" alt="..."> -->
-</section>
+
+
 
 <footer id="footer" class="footer">
   <!-- ======= Footer ======= -->

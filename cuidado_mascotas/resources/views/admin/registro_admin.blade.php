@@ -13,7 +13,7 @@ Mi tabla de usuario necesita:
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-lg-5 py-5">
       <div class="col-lg-7 text-center text-lg-start">
-        <h1 class="display-4 fw-bold lh-1 mb-3">LOGIN</h1>
+        <h1 class="display-4 fw-bold lh-1 mb-3">Registro</h1>
       </div>
       <div class="col-md-10 mx-auto col-lg-5">
         <form method="POST" action="/registro_admin" class="p-4 p-md-5 border rounded-3 bg-light">
@@ -43,11 +43,13 @@ Mi tabla de usuario necesita:
           </div>   
           <button class="w-100 btn btn-lg btn-primary" type="submit">Registrarse</button>
         </form>
-        <a href="entrar" class="nav-link">Iniciar Sesion</a></li>
+        <!-- <a href="entrar" class="nav-link">Iniciar Sesion</a></li> -->
+        <button class="w-100 btn btn-lg btn-primary" type="submit"> <a href="/login_admin" class="nav-link">Iniciar Sesion</a></button>
       </div>
     </div>
   </div>
 </select>
+
 
 
 <footer id="footer" class="footer">

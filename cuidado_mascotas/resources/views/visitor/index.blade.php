@@ -12,7 +12,36 @@
   @include('servicios')
   </div>
 </main>
-<footer id="footer" class="footer">
+
+
+
+<!-- Modal gallery -->
+<section class="">
+  <!-- Section: Images -->
+  <section class="">
+    <div class="row">
+      <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+        <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
+          <img src="{{ asset('/img/perro-home-3.jpg')}}" class="w-100"/>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
+          <img src="{{ asset('/img/perro-home-4.jpg')}}" class="w-100"/>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
+          <img src="{{ asset('/img/perro-home.jpg')}}" class="w-100"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<footer id="footer" class="footer mt-5">
   <!-- ======= Footer ======= -->
   @include('footer')
   <!-- End Footer -->

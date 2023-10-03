@@ -33,6 +33,7 @@
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Publicar</button>
         </form>
+        <button class="w-100 btn btn-lg btn-primary" type="submit"> <a href="/index" class="nav-link">Inicio</a></button>
       </div>
     </div>
   </div>
