@@ -30,8 +30,11 @@ Route::get('/contacto', function () {
 });
 
 Route::get('/blog', function () {
-    return view('visitor.blog');
+    $articulos = Article::all();
+    return view('visitor.blog', ['articulos' => $articulos]);
 });
+
+
 //VISTAS PARA ADMINISTRADOR
 Route::get('/login_admin', function () {
     return view('admin.login_admin');

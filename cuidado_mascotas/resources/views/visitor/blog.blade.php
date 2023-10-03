@@ -10,10 +10,21 @@
     <img class="d-block mx-auto mb-4" src="{{ asset('/img/consejos.png')}}" >
     <h1 class="display-5 fw-bold text-body-emphasis">Bienvenido a nuestro blog</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">¡Bienvenidos a nuestro blog dedicado al amor y cuidado de nuestras mascotas! Acá encontrarás consejos útiles y recursos esenciales. Únete a nuestra comunidad de amantes de las mascotas y descubre cómo crear una vida feliz y saludable para tus fieles amigos de cuatro patas.</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Comenzar</button>
-      </div>
+      <p class="lead mb-4">¡Bienvenidos a nuestro blog dedicado al amor y cuidado de nuestras mascotas! Acá encontrarás consejos útiles y recursos esenciales.</p>
+    </div>
+    <div class="container">
+    <div class="row">
+        @foreach($articulos as $articulo)
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $articulo->title }}</h5>
+                        <p class="card-text">{{ $articulo->content}}</p>
+                        <p>{{ $articulo->profile_id}}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
   </div>
 </section>
