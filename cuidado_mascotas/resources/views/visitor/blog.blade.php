@@ -35,6 +35,12 @@
   <!-- End Footer -->
 </section>
 
+<section>
+<img src="{{ asset('/img/perro-home.jpg')}}" class="rounded float-start" alt="...">
+<img src="{{ asset('/img/perro-home-2.jpg')}}" class="rounded float-end" alt="...">
+<!-- <img src="{{ asset('/img/perro-home-3.jpg')}}" class="rounded float-start" alt="...">
+<img src="{{ asset('/img/perro-home-4.jpg')}}" class="rounded float-end" alt="..."> -->
+</section>
 
 <footer id="footer" class="footer">
   <!-- ======= Footer ======= -->
