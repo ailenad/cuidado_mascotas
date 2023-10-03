@@ -43,7 +43,7 @@ Mi tabla de usuario necesita:
           </div>   
           <button class="w-100 btn btn-lg btn-primary" type="submit">Registrarse</button>
         </form>
-        <a href="entrar" class="nav-link">Iniciar Sesion</a></li>
+        <a href="login_admin" class="nav-link">Iniciar Sesion</a></li>
       </div>
     </div>
   </div>

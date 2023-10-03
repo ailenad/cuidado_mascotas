@@ -4,11 +4,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-use App\Models\Profile;
 use App\Models\Article;
-
-
-
+use App\Models\Profile;
+use App\Models\Category;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,16 +64,15 @@ Route::post('/login_admin', function(Request $request){
     return redirect('/registro_admin');   
 });
 Route::get('/abm_articles', function (Request $request) {
+    $categories = Category::all();
     if (Auth::check() && Auth::user()->role == 'editor') {
-        return view('admin.abm_articles');
+        return view('admin.abm_articles', compact('categories'));
     }
 
     return redirect('/login_admin');
  });
 
-// Route::get('/abm_articles', function () {
-//     return view('admin.abm_articles');
-// });
+
 //CREAR USUARIO
 Route::post('registro_admin',function (Request $request){
     $request->validate([
@@ -99,22 +96,36 @@ Route::post('registro_admin',function (Request $request){
     ]);
     return redirect('/login_admin');
 });
-Route::post('/crear_articulos',function (Request $request){
+Route::post('/crear_articulos', function (Request $request) {
+    $user = Auth::user();
+    
     // Valida los datos del formulario
-     $request->validate([
+    $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'required|string',
+        'category' => 'required|string', // Asegúrate de que el nombre del campo coincida con tu formulario
     ]);
-   
     // Crea un nuevo artículo en la base de datos
-    Article::create([
+    $article = Article::create([
         'title' => $request->input('title'),
-        'content' => $request->input('content'),
-        'profile_id' => $request->input('profile_id'),
+        'content' => $request->input('content'),   
+        'profile_id' => $user->id
     ]);
-    // Asocia el artículo con el perfil del usuario
-  
-     return redirect('/abm_articles');
+
+    // Aquí verifica si se proporcionó una categoría en el formulario
+    $categoryName = $request->input('category');
+    if (!empty($categoryName)) {
+        // Crea una nueva categoría si no existe
+        $category = Category::firstOrCreate(['name' => $categoryName]);
+
+        // Asocia el artículo con la categoría creada o existente
+        $article->categories()->attach($category->id);
+    }
+    
+    // Guarda el artículo
+    $article->save();
+
+    return redirect('/abm_articles');
 });
 
 // Ruta para mostrar el formulario de edición

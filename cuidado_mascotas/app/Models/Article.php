@@ -14,6 +14,10 @@ class Article extends Model
         'profile_id',
     ];
     public function categories(){
-        return $this->belongsToMany(Category::class, 'post_category', 'article_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'post_category');
+    }
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
     }
 }

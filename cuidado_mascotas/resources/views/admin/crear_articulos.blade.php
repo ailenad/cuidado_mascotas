@@ -19,10 +19,10 @@
       <div class="col-md-10 mx-auto col-lg-5">
         <form method="POST" action="/crear_articulos" class="p-4 p-md-5 border rounded-3 bg-light">
           @csrf
-          <div class="form-floating mb-3">
+          <!-- <div class="form-floating mb-3">
             <input type="number" name="profile_id"  id="profile_id" required class="form-control" id="floatingInput">
             <label for="profile_id">Id</label>
-          </div>
+          </div> -->
           <div class="form-floating mb-3">
             <input type="text" name="title" id="title" required  class="form-control" id="floatingPassword">
             <label for="title">Titulo</label>
@@ -31,6 +31,11 @@
           <label for="content" class="form-label">Descripción:</label>
           <textarea class="form-control" name="content" id="content" rows="7"></textarea>
           </div>
+          <div class="form-floating mb-3">
+              <input type="text" name="category" id="category" class="form-control">
+              <label for="category">Categoría:</label>
+          </div>
+
           <button class="w-100 btn btn-lg btn-primary" type="submit">Publicar</button>
         </form>
       </div>
