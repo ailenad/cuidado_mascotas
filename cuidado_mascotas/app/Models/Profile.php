@@ -13,4 +13,8 @@ class Profile extends Model
         'last_name',
         'user_id',
     ];
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

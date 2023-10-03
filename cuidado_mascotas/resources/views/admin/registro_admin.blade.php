@@ -51,7 +51,6 @@ Mi tabla de usuario necesita:
 </select>
 
 
-
 <footer id="footer" class="footer">
   <!-- ======= Footer ======= -->
   @include('footer')
