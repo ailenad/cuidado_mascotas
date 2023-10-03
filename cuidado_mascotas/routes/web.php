@@ -32,8 +32,7 @@ Route::get('/contacto', function () {
 });
 
 Route::get('/blog', function () {
-    $articulos = Article::all();
-    return view('visitor.blog', ['articulos' => $articulos]);
+    return view('blog');
 });
 
 
@@ -64,6 +63,8 @@ Route::post('/login_admin', function(Request $request){
     return redirect('/registro_admin');   
 });
 Route::get('/abm_articles', function (Request $request) {
+    $articulos = Article::all();
+    return view('admin.abm_articles', ['articulos' => $articulos]);
     $categories = Category::all();
     if (Auth::check() && Auth::user()->role == 'editor') {
         return view('admin.abm_articles', compact('categories'));
