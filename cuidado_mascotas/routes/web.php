@@ -1,9 +1,13 @@
 <?php
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Article;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,10 +40,12 @@ Route::get('/blog', function () {
 
 
 //VISTAS PARA ADMINISTRADOR
+Route::get('/registro_admin', function () {
+    return view('admin.registro_admin');
+});
 Route::get('/login_admin', function () {
     return view('admin.login_admin');
 });
-
 Route::get('/crear_articulos', function () {
     return view('admin.crear_articulos');
 })->name('crear_articulos');
@@ -48,12 +54,30 @@ Route::get('/editar_articulos', function () {
     return view('admin.editar_articulos');
 });
 
+Route::post('/login_admin', function(Request $request){
+    $user = User::where('email', $request->input('email'))
+    ->where('role', 'editor')
+    ->first();
 
-Route::get('/abm_articles', function () {
-    return view('admin.abm_articles');
+    if(Hash::check($request->input('password'), $user -> password)){
+      Auth::login($user);
+    return redirect('/abm_articles');  
+    };
+    return redirect('/registro_admin');   
 });
+Route::get('/abm_articles', function (Request $request) {
+    if (Auth::check() && Auth::user()->role == 'editor') {
+        return view('admin.abm_articles');
+    }
+
+    return redirect('/login_admin');
+ });
+
+// Route::get('/abm_articles', function () {
+//     return view('admin.abm_articles');
+// });
 //CREAR USUARIO
-Route::post('login_admin',function (Request $request){
+Route::post('registro_admin',function (Request $request){
     $request->validate([
         'nombre' => 'required|string|max:50',
         'email' => 'required|string|email|max:100|unique:users',
@@ -64,14 +88,16 @@ Route::post('login_admin',function (Request $request){
     $user = User::create([
         'nombre' => $request->input('nombre'),
         'email' => $request->input('email'),
-        'password' => bcrypt($request->input('password')),
+        'password' => Hash::make($request->input('password')),
+        //defino el rol amano 
+        'role' => 'editor',
     ]);
     Profile::create([
         'first_name' => $request->input('first_name'),
         'last_name' => $request->input('last_name'),
         'user_id' => $user->id,
     ]);
-    return redirect('/abm_articles');
+    return redirect('/login_admin');
 });
 Route::post('/crear_articulos',function (Request $request){
     // Valida los datos del formulario
