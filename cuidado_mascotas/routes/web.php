@@ -183,5 +183,5 @@ Route::delete('/eliminar_articulos/{id}', function ($id) {
     // Elimina el artículo de la base de datos
     $article->delete();
     // Redirige a la página de administración de artículos o a donde desees
-    return redirect('/index');
+    return redirect('/abm_articles');
 });

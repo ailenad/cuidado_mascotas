@@ -28,8 +28,8 @@
             <label for="title">Titulo</label>
           </div>
           <div class="form-floating mb-3">
-          <label for="content" class="form-label">Descripción:</label>
-          <textarea class="form-control" name="content" id="content" rows="7"></textarea>
+            <textarea class="form-control" name="content" id="content" rows="7"></textarea>
+            <label for="content" class="form-label">Descripción:</label>
           </div>
           <div class="form-floating mb-3">
               <input type="text" name="category" id="category" class="form-control">
