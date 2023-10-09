@@ -20,9 +20,9 @@
             <p>{{ $errors->first('title')}}</p>
           </div>
           <div class="form-floating mb-3">
-          <label for="content" class="form-label">Descripción:</label>
-          <textarea class="form-control" name="content" id="content" rows="3">{{ old('content', optional($article)->content)}}</textarea>
-          <p>{{ $errors->first('content')}}</p>
+         <textarea class="form-control" name="content" id="content" rows="3">{{ old('content', optional($article)->content)}}</textarea>
+         <label for="content" class="form-label">Descripción:</label>
+         <p>{{ $errors->first('content')}}</p>
         </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Publicar</button>
         </form>
@@ -32,9 +32,3 @@
    
 
 
-
-<footer id="footer" class="footer">
-  <!-- ======= Footer ======= -->
-  @include('footer')
-  <!-- End Footer -->
-</footer>

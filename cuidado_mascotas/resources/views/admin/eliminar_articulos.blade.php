@@ -8,23 +8,18 @@
         <h1 class="display-4 fw-bold lh-1 mb-3">Eliminar el articulo</h1>
       </div>
       <div class="col-md-10 mx-auto col-lg-5">
-        <form action="/eliminar_articulos/{id}" method="POST" class="p-4 p-md-5 border rounded-3 bg-light">
+        <form action="{{ route('eliminar_articulos', ['id' => $article->id]) }}" method="POST" class="p-4 p-md-5 border rounded-3 bg-light">
         @csrf
     @method('DELETE')
+    
         <div class="form-floating mb-3">
             <input type="number" name="profile_id" id="profile_id" required class="form-control" id="floatingInput">
             <label for="profile_id">Id</label>
           </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Eliminar</button>
+          <button type="submit" class="btn btn-danger">Eliminar Artículo</button>
         </form>
       </div>
     </div>
   </div>
    
 </section>
-
-  <footer id="footer" class="footer">
-  <!-- ======= Footer ======= -->
-  @include('footer')
-  <!-- End Footer -->
-</footer>

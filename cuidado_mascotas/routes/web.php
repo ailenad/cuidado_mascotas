@@ -170,34 +170,24 @@ Route::patch('/editar_articulos/{id}', function (Request $request, $id) {
 });
 
 
+Route::get('/eliminar_articulos/{id}', function ($id) {
+    $article = Article::find($id);
+    
+    
+    return view('admin.eliminar_articulos', [
+        'article' => $article,  
 
+    ]);
 
-//  Route::get('/eliminar_articulos', function (Request $request) {
-//     $article = profile_id::where('profile_id', $request->input('profile_id'))
-//     ->where('role', 'editor')
-//     ->first();
-//     return redirect('admin.abm_articles'); 
-// });
- 
+});
+// Ruta para eliminar el artículo (DELETE)
+Route::delete('/eliminar_articulos/{id}', function ($id) {
+    $article = Article::find($id);
 
+    if ($article) {
+        $article->delete();
+    }
 
+    return redirect('/abm_articles'); // Redirige a la página de administración de artículos
+})->name('eliminar_articulos');
 
-// // Ruta para eliminar un artículo
-// Route::delete('/eliminar_articulos/{id}',function (Request $request) {
-   
-//     if (Auth::check() && Auth::id()->role == 'editor') {
-//         return view('admin.abm_articles');
-//     }
-
-//     return redirect('/login_admin');
-
-//     $article = Article::find($id);
-//     // Comprueba si el artículo existe
-//     if (!$article) {
-//         abort(404);
-//     }
-//     // Elimina el artículo de la base de datos
-//     $article->delete();
-//     // Redirige a la página de administración de artículos o a donde desees
-//     return redirect('/abm_articles');
-// });
