@@ -34,7 +34,8 @@ Route::get('/contacto', function () {
 });
 
 Route::get('/blog', function () {
-    return view('visitor.blog');
+    $articles = Article::all();
+    return view('visitor.blog', ['articulos'=>$articles]);
 });
 
 
@@ -137,24 +138,13 @@ Route::post('/crear_articulos', function (Request $request) {
 Route::get('/editar_articulos/{id}', function ($id) {
     $article = Article::find($id);
     
-//     if (Auth::check() && Auth::user()->role == 'editor') {
-//         return view('admin.editar_articulos', compact('categories'));
-//     }
+    
+    return view('admin.editar_articulos', [
+        'article' => $article,  
 
-//     return redirect('/login_admin');
-//  });
+    ]);
 
-    if ($article) { 
-        return view('admin.editar_articulos', [
-            'article' => $article,
-            'title' => $request->input('title'),
-        'content' => $request->input('content'),   
-        ]);
-    } else {
-        return redirect('/login_admin');
-    }
 });
-
 
 Route::patch('/editar_articulos/{id}', function (Request $request, $id) {
     $validator = Validator::make($request->all(), [
