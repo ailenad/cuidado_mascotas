@@ -15,7 +15,10 @@
     
   </div>
 </section>
-
+<section>
+  @include('admin.abm_articles')
+  
+</section>
 
 
 

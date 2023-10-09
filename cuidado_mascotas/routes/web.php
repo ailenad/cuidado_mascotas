@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Article;
 use App\Models\Profile;
 use App\Models\Category;
+use Illuminate\Support\Facades\Validator;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +34,7 @@ Route::get('/contacto', function () {
 });
 
 Route::get('/blog', function () {
-    return view('blog');
+    return view('visitor.blog');
 });
 
 
@@ -98,6 +100,7 @@ Route::post('registro_admin',function (Request $request){
     return redirect('/login_admin');
 });
 Route::post('/crear_articulos', function (Request $request) {
+    
     $user = Auth::user();
     
     // Valida los datos del formulario
@@ -129,60 +132,82 @@ Route::post('/crear_articulos', function (Request $request) {
     return redirect('/abm_articles');
 });
 
-// Ruta para mostrar el formulario de edición
-Route::put('/editar_articulos/{id}', function ($id) {
+
+
+Route::get('/editar_articulos/{id}', function ($id) {
     $article = Article::find($id);
-    // Comprueba si el artículo existe
-    if (!$article) {
-        abort(404);
+    
+//     if (Auth::check() && Auth::user()->role == 'editor') {
+//         return view('admin.editar_articulos', compact('categories'));
+//     }
+
+//     return redirect('/login_admin');
+//  });
+
+    if ($article) { 
+        return view('admin.editar_articulos', [
+            'article' => $article,
+            'title' => $request->input('title'),
+        'content' => $request->input('content'),   
+        ]);
+    } else {
+        return redirect('/login_admin');
     }
-    return view('admin.editar_articulos', ['article' => $article]);
 });
 
-// Ruta para procesar la actualización del artículo
-Route::post('/editar_articulos/{id}', function (Request $request, $id) {
-    // Valida los datos del formulario
-    $validatedData = $request->validate([
+
+Route::patch('/editar_articulos/{id}', function (Request $request, $id) {
+    $validator = Validator::make($request->all(), [
         'title' => 'required|string|max:255',
         'content' => 'required|string',
-        'profile_id' => 'required|integer', // Asegúrate de que profile_id sea un entero
     ]);
 
-    // Busca el artículo por su ID
-    $article = Article::find($id);
-
-    // Comprueba si el artículo existe
-    if (!$article) {
-        abort(404);
+    if ($validator->fails()) {
+        return redirect("/editar_articulos/{$id}") 
+            ->withErrors($validator)
+            ->withInput();
     }
 
-    // Actualiza los campos del artículo con los datos validados
-    $article->update($validatedData);
+    $data = [
+        'title' => $request->input('title'),
+        'content' => $request->input('content'),
+    ];
 
-    // Redirige a la página de administración de artículos
-    return redirect('/abm_articles');
+    $article = Article::find($id);
+    $article->update($data);
+
+    return redirect('/abm_articles'); 
 });
 
 
 
 
-
- Route::get('/eliminar_articulos', function () {
-    return view('admin.eliminar_articulos');
-});
+//  Route::get('/eliminar_articulos', function (Request $request) {
+//     $article = profile_id::where('profile_id', $request->input('profile_id'))
+//     ->where('role', 'editor')
+//     ->first();
+//     return redirect('admin.abm_articles'); 
+// });
  
 
 
 
-// Ruta para eliminar un artículo
-Route::delete('/eliminar_articulos/{id}', function ($id) {
-    $article = Article::find($id);
-    // Comprueba si el artículo existe
-    if (!$article) {
-        abort(404);
-    }
-    // Elimina el artículo de la base de datos
-    $article->delete();
-    // Redirige a la página de administración de artículos o a donde desees
-    return redirect('/abm_articles');
-});
+// // Ruta para eliminar un artículo
+// Route::delete('/eliminar_articulos/{id}',function (Request $request) {
+   
+//     if (Auth::check() && Auth::id()->role == 'editor') {
+//         return view('admin.abm_articles');
+//     }
+
+//     return redirect('/login_admin');
+
+//     $article = Article::find($id);
+//     // Comprueba si el artículo existe
+//     if (!$article) {
+//         abort(404);
+//     }
+//     // Elimina el artículo de la base de datos
+//     $article->delete();
+//     // Redirige a la página de administración de artículos o a donde desees
+//     return redirect('/abm_articles');
+// });

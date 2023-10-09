@@ -9,8 +9,10 @@
   @include('admin.crear_articulos')
   <!-- End Footer -->
 </section>
+<section id="abm_articles" class="abm_articles">
 <div class="container">
     <div class="row">
+   
         @foreach($articulos as $articulo)
             <div class="col-md-4">
                 <div class="card">
@@ -27,7 +29,7 @@
             </div>
         @endforeach
     </div>
-
+</section>
     <footer id="footer" class="footer mt-5">
   <!-- ======= Footer ======= -->
   @include('footer')
