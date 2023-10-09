@@ -20,7 +20,6 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $articulo->title }}</h5>
                         <p class="card-text">{{ $articulo->content}}</p>
-                        <p>{{ $articulo->profile_id}}</p>
                         <!-- <button class=" btn btn-lg btn-primary" type="submit">Editar</button> -->
                         <button class="w-100 btn btn-lg btn-primary mb-3" type="submit"> <a href="/editar_articulos/{{ $articulo->id}}" class="nav-link">Editar</a></button>
                         <button class="w-100 btn btn-lg btn-primary" type="submit"> <a href="/eliminar_articulos/{{ $articulo->id}}" class="nav-link">Eliminar</a></button>

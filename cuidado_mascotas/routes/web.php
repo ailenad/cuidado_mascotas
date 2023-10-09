@@ -38,6 +38,30 @@ Route::get('/blog', function () {
     return view('visitor.blog', ['articulos'=>$articles]);
 });
 
+//rutas protegidas
+Route::middleware(['auth'])->group (function(){
+        Route::get('/crear_articulos', function () {
+            return view('admin.crear_articulos');
+        })->name('crear_articulos');
+
+        Route::get('/editar_articulos', function () {
+        return view('admin.editar_articulos');
+        });
+        
+        Route::get('/abm_articles', function (Request $request) {
+            if (Auth::check() && Auth::user()->role == 'editor') {
+                $articulos = Article::all();
+                $categories = Category::all();
+                return view('admin.abm_articles', compact('articulos','categories'));
+            }
+    
+            return redirect('/login_admin');
+        });
+});
+
+
+//CREAR USUARIO
+
 
 //VISTAS PARA ADMINISTRADOR
 Route::get('/registro_admin', function () {
@@ -46,13 +70,9 @@ Route::get('/registro_admin', function () {
 Route::get('/login_admin', function () {
     return view('admin.login_admin');
 });
-Route::get('/crear_articulos', function () {
-    return view('admin.crear_articulos');
-})->name('crear_articulos');
 
-Route::get('/editar_articulos', function () {
-    return view('admin.editar_articulos');
-});
+
+
 
 Route::post('/login_admin', function(Request $request){
     $user = User::where('email', $request->input('email'))
@@ -65,19 +85,7 @@ Route::post('/login_admin', function(Request $request){
     };
     return redirect('/registro_admin');   
 });
-Route::get('/abm_articles', function (Request $request) {
-    $articulos = Article::all();
-    return view('admin.abm_articles', ['articulos' => $articulos]);
-    $categories = Category::all();
-    if (Auth::check() && Auth::user()->role == 'editor') {
-        return view('admin.abm_articles', compact('categories'));
-    }
 
-    return redirect('/login_admin');
- });
-
-
-//CREAR USUARIO
 Route::post('registro_admin',function (Request $request){
     $request->validate([
         'nombre' => 'required|string|max:50',
@@ -133,8 +141,6 @@ Route::post('/crear_articulos', function (Request $request) {
     return redirect('/abm_articles');
 });
 
-
-
 Route::get('/editar_articulos/{id}', function ($id) {
     $article = Article::find($id);
     
@@ -168,26 +174,16 @@ Route::patch('/editar_articulos/{id}', function (Request $request, $id) {
 
     return redirect('/abm_articles'); 
 });
-
-
 Route::get('/eliminar_articulos/{id}', function ($id) {
     $article = Article::find($id);
-    
-    
-    return view('admin.eliminar_articulos', [
-        'article' => $article,  
-
-    ]);
-
-});
-// Ruta para eliminar el artículo (DELETE)
-Route::delete('/eliminar_articulos/{id}', function ($id) {
-    $article = Article::find($id);
-
     if ($article) {
+        // Desvincula todas las categorías relacionadas
+        $article->categories()->detach();
+
+        // Elimina el artículo
         $article->delete();
     }
-
-    return redirect('/abm_articles'); // Redirige a la página de administración de artículos
-})->name('eliminar_articulos');
+    return redirect('/abm_articles');
+ 
+});
 
