@@ -33,7 +33,10 @@ Route::get('/contacto', function () {
     return view('visitor.contacto');
 });
 
-
+Route::get('/blog', function () {
+    $articles = Article::all();
+    return view('visitor.blog', ['articulos'=>$articles]);
+});
 
 //rutas protegidas
 Route::middleware(['auth'])->group (function(){
@@ -55,10 +58,7 @@ Route::middleware(['auth'])->group (function(){
             return redirect('/login_admin');
         });
 });
-Route::get('/blog', function () {
-    $articles = Article::all();
-    return view('visitor.blog', ['articulos'=>$articles]);
-});
+
 
 //VISTAS PARA ADMINISTRADOR
 Route::get('/registro_admin', function () {
@@ -73,23 +73,35 @@ Route::post('/login_admin', function(Request $request){
     $user = User::where('email', $request->input('email'))
     ->where('role', 'editor')
     ->first();
+    if ($user) {
+        if(Hash::check($request->input('password'), $user -> password)){
+            Auth::login($user);
+            return redirect('/abm_articles');  
+            }
+    }else{
+         return view ('admin.login_admin');
+    }
+   
+   
 
-    if(Hash::check($request->input('password'), $user -> password)){
-      Auth::login($user);
-    return redirect('/abm_articles');  
-    };
-    return redirect('/registro_admin');   
+     
 });
 
 //Registro
 Route::post('registro_admin',function (Request $request){
+    $mensajesError = [
+        'required' => 'El campo :attribute es obligatorio.',
+        'email' => 'El campo :attribute debe ser una dirección de correo válida.',
+        'password' => 'El password debe tener minimo 8 caracteres',
+    ];
     $request->validate([
         'nombre' => 'required|string|max:50',
         'email' => 'required|string|email|max:100|unique:users',
         'password' => 'required|string|min:8|max:255',
         'first_name' => 'required|string|max:25',
         'last_name' => 'required|string|max:25',
-    ]);
+    ],$mensajesError);
+
     $user = User::create([
         'nombre' => $request->input('nombre'),
         'email' => $request->input('email'),
@@ -109,13 +121,17 @@ Route::post('registro_admin',function (Request $request){
 Route::post('/crear_articulos', function (Request $request) {
     
     $user = Auth::user();
-    
+    $mensajesError = [
+        'title' => 'Debe ingresar un titulo para su articulo.',
+        'content' => 'EL contenido del articulo no puede quedar vacio.',
+        'category' => 'Debe ingresar una categoria',
+    ];
     // Valido los datos del formulario
     $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'category' => 'required|string', 
-    ]);
+    ] ,$mensajesError);
     // Crea un artículo 
     $article = Article::create([
         'title' => $request->input('title'),

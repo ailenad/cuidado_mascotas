@@ -12,17 +12,29 @@
         <form method="POST" action="/crear_articulos" class="p-4 p-md-5 border rounded-3 bg-light">
           @csrf
           <div class="form-floating mb-3">
-            <input type="text" name="title" id="title" required  class="form-control" id="floatingPassword">
+            <input type="text" name="title" id="title" required  class="form-control @error('title') is-invalid @enderror" id="floatingPassword">
             <label for="title">Titulo</label>
           </div>
+          @error('title')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+         
+
           <div class="form-floating mb-3">
-            <textarea class="form-control" name="content" id="content" rows="7"></textarea>
+            <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content"  rows="7"></textarea>
             <label for="content" class="form-label">Descripción:</label>
           </div>
+          @error('content')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+
           <div class="form-floating mb-3">
-              <input type="text" name="category" id="category" class="form-control">
+              <input type="text" name="category" id="category" class="form-control @error('category') is-invalid @enderror">
               <label for="category">Categoría:</label>
           </div>
+          @error('category')
+          <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
 
           <button class="w-100 btn btn-lg btn-primary" type="submit">Publicar</button>
         </form>
