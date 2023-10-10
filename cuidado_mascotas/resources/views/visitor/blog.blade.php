@@ -22,7 +22,7 @@
    
         @foreach($articulos as $articulo)
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-5">
                     <div class="card-body">
                         <h5 class="card-title">{{ $articulo->title }}</h5>
                         <p class="card-text">{{ $articulo->content}}</p> 

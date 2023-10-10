@@ -8,7 +8,7 @@
         <h1 class="display-4 fw-bold lh-1 mb-3">Crear un nuevo articulo</h1>
         <p class="col-lg-10 fs-4">Tu experiencia y conocimiento son valiosos para nuestra comunidad. ¿Tienes un consejo o truco que funcionó para cuidar a tus mascotas? Animate a agregar tu consejo y ayudanos a construir juntos un recurso aún más completo y útil.</p>
       </div>
-      <div class="col-md-10 mx-auto col-lg-5">
+      <div class="col-md-10 mx-auto col-lg-5 mb-5">
         <form method="POST" action="/crear_articulos" class="p-4 p-md-5 border rounded-3 bg-light">
           @csrf
           <div class="form-floating mb-3">

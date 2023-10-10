@@ -4,7 +4,7 @@
   @include('admin.crear_articulos')
   <!-- End Footer -->
 </section>
-<section id="abm_articles" class="abm_articles">
+<section id="abm_articles" class="abm_articles mb-5">
 <div class="container">
     <div class="row">
    
