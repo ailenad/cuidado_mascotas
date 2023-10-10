@@ -21,7 +21,6 @@
         <li class="nav-item"><a href="index" class="nav-link " aria-current="page">Home</a></li>
         <li class="nav-item"><a href="blog" class="nav-link">Blog</a></li>
         <li class="nav-item"><a href="registro_admin" class="nav-link">Admin</a></li>
-        <!-- <li class="nav-item"><a href="login" class="nav-link">Login</a></li> -->
       </ul>
     </header>
   </div>

@@ -1,11 +1,4 @@
- <!-- voy a poner un formulario de login, despues le damos estilo 
-Mi tabla de usuario necesita: 
-  $table->id();
-            $table->string('email',100)->unique();
-            $table->string('nombre',50);
-            $table->string('password');
-            $table->timestamps(); -->
-            <header id="header">
+<header id="header">
     @include('header')
 </header>
 
@@ -43,7 +36,6 @@ Mi tabla de usuario necesita:
           </div>   
           <button class="w-100 btn btn-lg btn-primary" type="submit">Registrarse</button>
         </form>
-        <!-- <a href="entrar" class="nav-link">Iniciar Sesion</a></li> -->
         <button class="w-100 btn btn-lg btn-primary" type="submit"> <a href="/login_admin" class="nav-link">Iniciar Sesion</a></button>
       </div>
     </div>

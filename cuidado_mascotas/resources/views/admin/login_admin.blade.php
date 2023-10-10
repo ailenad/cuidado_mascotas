@@ -1,10 +1,4 @@
- <!-- voy a poner un formulario de login, despues le damos estilo 
-Mi tabla de usuario necesita: 
-  $table->id();
-            $table->string('email',100)->unique();
-            $table->string('nombre',50);
-            $table->string('password');
-            $table->timestamps(); -->
+
 <header id="header">
     @include('header')
 </header>

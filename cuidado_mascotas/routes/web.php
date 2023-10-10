@@ -33,10 +33,7 @@ Route::get('/contacto', function () {
     return view('visitor.contacto');
 });
 
-Route::get('/blog', function () {
-    $articles = Article::all();
-    return view('visitor.blog', ['articulos'=>$articles]);
-});
+
 
 //rutas protegidas
 Route::middleware(['auth'])->group (function(){
@@ -58,10 +55,10 @@ Route::middleware(['auth'])->group (function(){
             return redirect('/login_admin');
         });
 });
-
-
-//CREAR USUARIO
-
+Route::get('/blog', function () {
+    $articles = Article::all();
+    return view('visitor.blog', ['articulos'=>$articles]);
+});
 
 //VISTAS PARA ADMINISTRADOR
 Route::get('/registro_admin', function () {
@@ -71,9 +68,7 @@ Route::get('/login_admin', function () {
     return view('admin.login_admin');
 });
 
-
-
-
+//Inicio sesion
 Route::post('/login_admin', function(Request $request){
     $user = User::where('email', $request->input('email'))
     ->where('role', 'editor')
@@ -86,6 +81,7 @@ Route::post('/login_admin', function(Request $request){
     return redirect('/registro_admin');   
 });
 
+//Registro
 Route::post('registro_admin',function (Request $request){
     $request->validate([
         'nombre' => 'required|string|max:50',
@@ -98,7 +94,7 @@ Route::post('registro_admin',function (Request $request){
         'nombre' => $request->input('nombre'),
         'email' => $request->input('email'),
         'password' => Hash::make($request->input('password')),
-        //defino el rol amano 
+        //defino el rol 
         'role' => 'editor',
     ]);
     Profile::create([
@@ -108,39 +104,41 @@ Route::post('registro_admin',function (Request $request){
     ]);
     return redirect('/login_admin');
 });
+
+//Creo Articulos
 Route::post('/crear_articulos', function (Request $request) {
     
     $user = Auth::user();
     
-    // Valida los datos del formulario
+    // Valido los datos del formulario
     $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'required|string',
-        'category' => 'required|string', // Asegúrate de que el nombre del campo coincida con tu formulario
+        'category' => 'required|string', 
     ]);
-    // Crea un nuevo artículo en la base de datos
+    // Crea un artículo 
     $article = Article::create([
         'title' => $request->input('title'),
         'content' => $request->input('content'),   
         'profile_id' => $user->id
     ]);
 
-    // Aquí verifica si se proporcionó una categoría en el formulario
+    // Verifico si hay categoria en el formulario
     $categoryName = $request->input('category');
     if (!empty($categoryName)) {
-        // Crea una nueva categoría si no existe
+        // Creo una nueva categoría si no existe
         $category = Category::firstOrCreate(['name' => $categoryName]);
 
-        // Asocia el artículo con la categoría creada o existente
+        // Asocio el artículo con la categoría creada o existente
         $article->categories()->attach($category->id);
     }
     
-    // Guarda el artículo
+   
     $article->save();
 
     return redirect('/abm_articles');
 });
-
+//Editar articulos
 Route::get('/editar_articulos/{id}', function ($id) {
     $article = Article::find($id);
     
@@ -151,7 +149,6 @@ Route::get('/editar_articulos/{id}', function ($id) {
     ]);
 
 });
-
 Route::patch('/editar_articulos/{id}', function (Request $request, $id) {
     $validator = Validator::make($request->all(), [
         'title' => 'required|string|max:255',
@@ -174,6 +171,7 @@ Route::patch('/editar_articulos/{id}', function (Request $request, $id) {
 
     return redirect('/abm_articles'); 
 });
+//Elimino articulos
 Route::get('/eliminar_articulos/{id}', function ($id) {
     $article = Article::find($id);
     if ($article) {
