@@ -17,4 +17,5 @@ class Profile extends Model
     {
         return $this->hasMany(Article::class);
     }
+  
 }
